@@ -1,0 +1,13 @@
+# Task 1 independent review
+
+Verdict: **Spec PASS; Quality PASS.** No actionable findings in the changed financial model or tests.
+
+Reviewed the agreed design, model report, both supplied diffs, full `src/model.ts`, and `tests/model.test.ts`. This is a model review; UI disclosures, interaction, policy-source validation, and visual acceptance remain separate work.
+
+The implementation matches the agreed explicit five-year default and monthly horizon, independent loan maturity, separate own-housing rent and rental income, mutually exclusive net/detail income, conditional 24/60-month tax thresholds, manual tax replacement, and conservative unknown exemption. Sale cash deducts outstanding debt, taxes, and sale fees once, preserves negative proceeds, and keeps restricted provident assets separate. Equal cash budgets have a zero floor; principal and provident transfers are absent from economic gains. Contribution totals reconcile to cash, provident, and retained-property differences. Sensitivity scans change one active input at a time and expose clipped endpoints.
+
+Additional independent verification used Node's TypeScript stripping without changing implementation or test files. Five hundred deterministic mixed scenarios covered own/rental purposes, net/detail rental income, positive and negative operating income, zero/positive loan and investment rates, loan terms shorter/longer than the horizon, keep/monthly/immediate/delayed provident use, sale/hold, and auto/manual tax. All reconciled contribution sums, asset-component sums, principal, equal starting resources after upfront fees, nonnegative external budgets and fund balances, and sale proceeds within one cent. A one-month zero-rate full provident prepayment independently verified that settlement is capped at debt remaining after that month's scheduled payment: withdrawal 2,983,333.3333333335 yuan, remaining debt zero, economic difference 4,500 yuan.
+
+The first standalone full-settlement fixture accidentally provided only 1,000,000 yuan of fund balance while expecting a 2,983,333.33 withdrawal; the model correctly capped it at 1,000,000. Correcting the fixture to 5,000,000 produced the stated passing settlement check. The existing reported 42-test run and build were inspected, not repeated.
+
+Integration notes: `end.debt` intentionally retains the pre-sale balance for compatibility; downstream UI must use `sale.netProceeds` directly and avoid subtracting this balance again. `sale.netProceeds` is retained equity when `sale.executed` is false and must be labeled accordingly. These contracts are documented in the implementation report and are not defects.
