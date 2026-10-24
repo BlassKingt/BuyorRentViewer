@@ -1,5 +1,4 @@
 # 买或租 · 个人住房决策实验室
-![Uploading researcher-v1.png…]()
 
 静态 React / TypeScript / Vite 网页。买来自住或买来出租，从房价和租金开始，按需加入贷款、公积金和费用。默认比较持有满五年后假设成交的资产，区分普通资金、受限公积金和继续持有的房屋权益。原创动漫助手解释结果；无 AI API、账号或财务数据上传。
 
@@ -65,10 +64,11 @@ model.ts 无浏览器或 React 依赖；HousingCalculator 是独立组件；CSS 
 ## 设计与验收
 
 见 [设计](docs/superpowers/specs/2026-10-20-buy-or-rent-design.md)、[计划](docs/superpowers/plans/2026-10-20-buy-or-rent.md)、[角色素材与提示词](docs/character-assets.md)、[模型报告](docs/superpowers/model-report.md)、[评审记录](REVIEW.md)。技术检查不代替用户对角色、视觉及交互的验收。
-![Uploading researcher-chibi-v1.png…]()
 
 
 ## 补充口径
 
 - 一次性公积金投入勾选「同时从首月按月抵扣」后，月度提取从第1个月开始，不等待未来的一次性投入日期；较早的按月提取可能减少后续一次性投入时的可用余额。
 - 买入房价扫描固定期末总涨跌幅百分比，因此期末估值/成交价随买入价同比变化；它不模拟未来售价固定的购入议价。现金投资收益率对应的机会成本已包含在两条路径中，不应再次扣除；居住体验等非财务因素及其他未建模因素不在计算内。
+
+  ![researcher-v1](.\public\mascot\researcher-chibi-v1.png)
